@@ -20,15 +20,16 @@ const UserInterface = () => {
         balance: 0,
     });
     const [users, setUsers] = useState([]);
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+        setDeleted(false);
+    }, [deleted, formData]);
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8080/user');
-
+            const response = await axios.get('http://127.0.0.1:5000/user');
             setUsers(response.data);
         } catch (error) {
             console.error('Error loading users:', error);
@@ -37,14 +38,11 @@ const UserInterface = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            await axios.delete(`http://127.0.0.1:8080/user/${userId}`);
-
+            await axios.delete(`http://127.0.0.1:5000/user/${userId}`);
             alert('The user has been successfully deleted!');
-
-            fetchUsers();
+            setDeleted(true);
         } catch (error) {
             console.error('Error when deleting the user:', error);
-
             alert('An error occurred while deleting the user');
         }
     };
@@ -62,12 +60,8 @@ const UserInterface = () => {
         e.preventDefault();
 
         try {
-            await axios.post('http://127.0.0.1:8080/user', formData);
-
+            await axios.post('http://127.0.0.1:5000/user', formData);
             alert('The user has been successfully created!');
-
-            fetchUsers();
-
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -78,7 +72,6 @@ const UserInterface = () => {
             });
         } catch (error) {
             console.error('Error when creating a user:', error);
-
             alert('An error occurred when creating a user');
         }
     };

@@ -1,5 +1,5 @@
-> [!NOTE] > **Used software versions:**
->
+> [!NOTE]
+> **Used software versions:**
 > - _operating system: Ubuntu 23.10_
 > - _docker version: 25.0.1_
 > - _docker-compose version: 1.25.0_

@@ -10,9 +10,9 @@
 ### I
 Clone the project:
 ```
-git clone git@github.com:MaximEYakovlev/simple-app.git
+git clone git@github.com:MaximEYakovlev/simple-balance-management-app.git
 ```
-Create `.env` file in root of the `server` directory.
+Create _`.env`_ file in root of the _`server`_ directory.
 Paste the following variables into it:
 ```
 PORT=8080
@@ -27,7 +27,7 @@ Execute the next docker command:
 docker-compose up
 ```
 ### III
-Find out the `web-server` `CONTAINER ID` by executing the next docker command in the terminal:
+Find out the _`web-server`_ _`CONTAINER ID`_ by executing the next docker command in the terminal:
 ```
 docker ps
 ```
@@ -40,4 +40,4 @@ EXAMPLE:
 docker exec 74febf7175f1 npx sequelize-cli db:migrate
 ```
 ### IV
-Enter [http://localhost:3000/](http://localhost:3000/) to the browser URL bar.
+Enter [http://127.0.0.1:3000/](http://127.0.0.1:3000/) to the browser URL bar.

@@ -1,0 +1,32 @@
+version: "3.1"
+
+services:
+
+  db:
+    image: postgres
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password_dev
+      POSTGRES_USER: user_dev
+      POSTGRES_DB: database_dev
+    ports:
+      - '5432:5432'
+
+  server:
+    build: server/
+    container_name: web-server
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  client:
+    build: client/
+    container_name: react-app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server

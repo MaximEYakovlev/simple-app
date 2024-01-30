@@ -12,7 +12,7 @@ Clone the project:
 ```
 git clone git@github.com:MaximEYakovlev/simple-balance-management-app.git
 ```
-Create _`.env`_ file in root of the _`server`_ directory.
+Create `.env` file in root of the `server` directory.
 Paste the following variables into it:
 ```
 PORT=8080
@@ -27,7 +27,7 @@ Execute the next docker command:
 docker-compose up
 ```
 ### III
-Find out the _`web-server`_ _`CONTAINER ID`_ by executing the next docker command in the terminal:
+Find out the `web-server` `CONTAINER ID` by executing the next docker command in the terminal:
 ```
 docker ps
 ```

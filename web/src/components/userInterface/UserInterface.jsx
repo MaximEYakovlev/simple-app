@@ -27,11 +27,25 @@ const UserInterface = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5001/user');
+            const response = await axios.get('http://127.0.0.1:8080/user');
 
             setUsers(response.data);
         } catch (error) {
             console.error('Error loading users:', error);
+        }
+    };
+
+    const handleDeleteUser = async (userId) => {
+        try {
+            await axios.delete(`http://127.0.0.1:8080/user/${userId}`);
+
+            alert('The user has been successfully deleted!');
+
+            fetchUsers();
+        } catch (error) {
+            console.error('Error when deleting the user:', error);
+
+            alert('An error occurred while deleting the user');
         }
     };
 
@@ -48,9 +62,11 @@ const UserInterface = () => {
         e.preventDefault();
 
         try {
-            await axios.post('http://127.0.0.1:5001/user', formData);
+            await axios.post('http://127.0.0.1:8080/user', formData);
 
             alert('The user has been successfully created!');
+
+            fetchUsers();
 
             setFormData({
                 firstName: '',
@@ -130,6 +146,16 @@ const UserInterface = () => {
                                 <td>{user.firstName}</td>
                                 <td>{user.lastName}</td>
                                 <td>{user.balance}</td>
+                                <td>
+                                    <button
+                                        style={{ backgroundColor: 'tomato' }}
+                                        onClick={() =>
+                                            handleDeleteUser(user.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

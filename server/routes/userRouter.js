@@ -15,7 +15,10 @@ router
 
     .post((req, res) => {
         createNewUser(req, res);
-    })
+    });
+
+router
+    .route('/:id')
 
     .delete((req, res) => {
         deleteUser(req, res);

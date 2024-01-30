@@ -1,12 +1,7 @@
-import { Fragment } from 'react';
 import UserInterface from './components/userInterface/UserInterface';
 
 function App() {
-    return (
-        <Fragment>
-            <UserInterface />
-        </Fragment>
-    );
+    return <UserInterface />;
 }
 
 export default App;

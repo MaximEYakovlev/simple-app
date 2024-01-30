@@ -31,7 +31,7 @@ const createNewUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
         await User.destroy({

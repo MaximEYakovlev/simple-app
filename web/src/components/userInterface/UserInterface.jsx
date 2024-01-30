@@ -29,7 +29,7 @@ const UserInterface = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/user');
+            const response = await axios.get('http://127.0.0.1:8080/user');
             setUsers(response.data);
         } catch (error) {
             console.error('Error loading users:', error);
@@ -38,7 +38,7 @@ const UserInterface = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            await axios.delete(`http://127.0.0.1:5000/user/${userId}`);
+            await axios.delete(`http://127.0.0.1:8080/user/${userId}`);
             alert('The user has been successfully deleted!');
             setDeleted(true);
         } catch (error) {
@@ -60,7 +60,7 @@ const UserInterface = () => {
         e.preventDefault();
 
         try {
-            await axios.post('http://127.0.0.1:5000/user', formData);
+            await axios.post('http://127.0.0.1:8080/user', formData);
             alert('The user has been successfully created!');
             setFormData({
                 firstName: '',

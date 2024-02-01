@@ -1,7 +1,7 @@
-import UserInterface from './components/userInterface/UserInterface';
+import { Container } from './components/container/Container';
 
 function App() {
-    return <UserInterface />;
+    return <Container />;
 }
 
 export default App;

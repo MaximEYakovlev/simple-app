@@ -1,23 +1,35 @@
 const { Account } = require('../db/models');
 
-const checkBalance = async (id, amount, t) => {
+const checkBalance = async (userId, amount, t) => {
     try {
-        const balance = await getBalance(id, t);
+        const balance = await getBalance(userId, t);
 
-        if (balance >= amount) {
+        if (balance >= Number(amount)) {
             return true;
         } else {
             return false;
         }
     } catch (error) {
-        res.status(500).json(error);
+        console.error(error);
     }
 };
 
-const getBalance = async (id, t) => {
+const changeBalance = async (userId, updatedBalance, t) => {
+    try {
+        await Account.update(
+            { balance: updatedBalance },
+            { where: { userId } },
+            { transaction: t }
+        );
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const getBalance = async (userId, t) => {
     try {
         const accountData = await Account.findOne(
-            { where: { userId: id } },
+            { where: { userId } },
             { transaction: t }
         );
         const {
@@ -26,20 +38,54 @@ const getBalance = async (id, t) => {
 
         return Number(balance);
     } catch (error) {
-        res.status(500).json(error);
+        console.error(error);
     }
 };
 
-const updateBalance = async (id, updatedBalance, t) => {
-    try {
-        await Account.update(
-            { balance: updatedBalance },
-            { where: { userId: id } },
-            { transaction: t }
-        );
-    } catch (error) {
-        res.status(500).json(error);
+const replenish = async (userId, amount, t) => {
+    const currentBalance = await getBalance(userId, t);
+    const updatedBalance = currentBalance + Number(amount);
+
+    await changeBalance(userId, updatedBalance, t);
+};
+
+const withdraw = async (userId, amount, t) => {
+    const transactionConfirmation = await checkBalance(userId, amount, t);
+
+    if (transactionConfirmation) {
+        const currentBalance = await getBalance(userId, t);
+        const updatedBalance = currentBalance - Number(amount);
+
+        await changeBalance(userId, updatedBalance, t);
+    } else {
+        console.log({
+            message: 'the balance cannot be less than zero',
+        });
     }
 };
 
-module.exports = { checkBalance, getBalance, updateBalance };
+const transfer = async (userId, amount, action, t) => {
+    const transactionConfirmation = await checkBalance(userId, amount, t);
+
+    if (transactionConfirmation) {
+        await withdraw(userId, amount, t);
+    } else {
+        console.log({
+            message: 'the balance cannot be less than zero',
+        });
+        return;
+    }
+
+    const { recipientId } = action;
+
+    await replenish(recipientId, amount, t);
+};
+
+module.exports = {
+    checkBalance,
+    changeBalance,
+    getBalance,
+    replenish,
+    withdraw,
+    transfer,
+};

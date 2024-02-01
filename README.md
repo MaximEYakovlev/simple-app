@@ -1,8 +1,8 @@
 > [!NOTE]
 > **Used software versions:**
-> - _operating system: Ubuntu 23.10_
-> - _docker version: 25.0.1_
-> - _docker-compose version: 1.25.0_
+> - operating system: Ubuntu 23.10
+> - docker version: 25.0.1
+> - docker-compose version: 1.25.0
 
 ### Project launch steps
 
@@ -14,7 +14,7 @@ Clone the project:
 git clone git@github.com:MaximEYakovlev/simple-balance-management-app.git
 ```
 
-Create `.env` file in root of the `server` directory.
+Create `.env` file in the root of the `server` directory.
 Paste the following variables into it:
 
 ```

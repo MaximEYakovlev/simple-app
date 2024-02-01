@@ -1,0 +1,39 @@
+.users {
+    width: 45%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Arial;
+}
+
+.users table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users th,
+.users td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.users button {
+    background-color: tomato;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.users button:hover {
+    background-color: #ff0000;
+    color: #ff0000;
+}

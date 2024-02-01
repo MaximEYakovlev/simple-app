@@ -5,7 +5,7 @@ const createNewUser = async (req, res) => {
         req.body;
 
     try {
-        await User.create(
+        const newUserData = await User.create(
             {
                 firstName,
                 lastName,
@@ -24,7 +24,7 @@ const createNewUser = async (req, res) => {
                 ],
             }
         );
-        res.sendStatus(200);
+        res.status(200).json(newUserData);
     } catch (error) {
         res.status(500).json(error);
     }

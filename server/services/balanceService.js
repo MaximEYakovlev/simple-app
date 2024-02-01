@@ -1,34 +1,28 @@
 const { sequelize } = require('../db/models');
-const { checkBalance, getBalance, updateBalance } = require('./helpers');
+const { getBalance, replenish, transfer, withdraw } = require('./helpers');
 
-const changeBalance = async (req, res) => {
-    const { id, amount, action } = req.body;
+const updateBalance = async (req, res) => {
+    const { userId, amount, action } = req.body;
 
     try {
         await sequelize.transaction(async (t) => {
-            const currentBalance = await getBalance(id, t);
-            let updatedBalance;
-
-            if (action === 'replenish') {
-                updatedBalance = currentBalance + amount;
-
-                updateBalance(id, updatedBalance, t);
-
-                res.sendStatus(200);
-            } else if (action === 'withdraw') {
-                const transactionConfirm = await checkBalance(id, amount, t);
-
-                if (transactionConfirm) {
-                    updatedBalance = currentBalance - amount;
-
-                    updateBalance(id, updatedBalance, t);
-
+            switch (action.type) {
+                case 'replenish':
+                    await replenish(userId, amount, t);
                     res.sendStatus(200);
-                } else {
+                    break;
+                case 'withdraw':
+                    await withdraw(userId, amount, t);
+                    res.sendStatus(200);
+                    break;
+                case 'transfer':
+                    await transfer(userId, amount, action, t);
+                    res.sendStatus(200);
+                    break;
+                default:
                     res.json({
-                        message: 'the balance cannot be less than zero',
+                        message: 'there is no such action type',
                     });
-                }
             }
         });
     } catch (error) {
@@ -36,4 +30,18 @@ const changeBalance = async (req, res) => {
     }
 };
 
-module.exports = { changeBalance };
+const fetchBalance = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await sequelize.transaction(async (t) => {
+            const userBalanse = await getBalance(id, t);
+
+            res.status(200).json(userBalanse);
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+module.exports = { fetchBalance, updateBalance };

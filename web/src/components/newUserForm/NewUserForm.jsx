@@ -39,7 +39,7 @@ export const NewUserForm = ({ addUserToList }) => {
                 lastName: '',
                 email: '',
                 birthDate: '',
-                accountNumber: 0,
+                accountNumber: generatedAccountNumber,
                 balance: 0,
             });
         } catch (error) {

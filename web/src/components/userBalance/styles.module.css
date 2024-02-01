@@ -1,10 +1,11 @@
 .form {
-    width: 13%;
-    background-color: #fff;
+    width: 18%;
+    height: 40%;
+    background-color: hsl(0, 0%, 100%);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-left: 20px;
+    margin: 10px;
     font-family: Arial;
 }
 
@@ -43,4 +44,10 @@
 
 .form button:hover {
     background-color: #0056b3;
+}
+
+.balance {
+    color: rgb(72, 179, 72);
+    font-size: large;
+    font-weight: bold;
 }

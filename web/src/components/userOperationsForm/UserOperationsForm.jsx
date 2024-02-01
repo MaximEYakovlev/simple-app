@@ -37,10 +37,10 @@ export const UserOperationsForm = () => {
     };
 
     return (
-        <div className={styles.form}>
+        <div className={styles.container}>
             <h3>Balance operations</h3>
-            <div>
-                <div>
+            <div className={styles.row}>
+                <div className={styles.column}>
                     <h4>Withdraw</h4>
                     <label>User ID:</label>
                     <input
@@ -68,7 +68,7 @@ export const UserOperationsForm = () => {
                         Withdraw
                     </button>
                 </div>
-                <div>
+                <div className={styles.column}>
                     <h4>Replenish</h4>
                     <label>User ID:</label>
                     <input
@@ -96,7 +96,9 @@ export const UserOperationsForm = () => {
                         Replenish
                     </button>
                 </div>
-                <div>
+            </div>
+            <div className={styles.row}>
+                <div className={styles.column}>
                     <h4>Transfer</h4>
                     <label>Sender ID:</label>
                     <input

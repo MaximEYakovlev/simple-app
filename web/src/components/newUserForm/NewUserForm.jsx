@@ -49,7 +49,7 @@ export const NewUserForm = ({ addUserToList }) => {
 
     return (
         <div className={styles.form}>
-            <h3>Create a new user</h3>
+            <h3>Create new user</h3>
             <form onSubmit={handleFormSubmit}>
                 <div>
                     <label>First Name:</label>
@@ -76,7 +76,7 @@ export const NewUserForm = ({ addUserToList }) => {
                         name="email"
                         value={formData.email}
                         onChange={handleFormChange}
-                        placeholder="The email address must be unique."
+                        placeholder="must be unique"
                     />
                 </div>
                 <div>
@@ -88,7 +88,7 @@ export const NewUserForm = ({ addUserToList }) => {
                         onChange={handleFormChange}
                     />
                 </div>
-                <button type="submit">Create a user</button>
+                <button type="submit">Create user</button>
             </form>
         </div>
     );

@@ -41,8 +41,8 @@ export const UserBalance = () => {
                     Check the balance
                 </button>
             </div>
-            <div>Balance:</div>
-            <div style={{ color: 'red', fontWeight: 'bold' }}>
+            <h4>Balance:</h4>
+            <div className={styles.balance}>
                 {new Intl.NumberFormat('ru-RU', {
                     style: 'currency',
                     currency: 'RUB',

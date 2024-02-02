@@ -1,4 +1,29 @@
-const { Account } = require('../db/models');
+const { Account, User } = require('../db/models');
+
+const isUser = async (userId, t) => {
+    try {
+        const user = await User.findOne(
+            {
+                where: {
+                    id: userId,
+                },
+            },
+            { transaction: t }
+        );
+
+        if (user) {
+            return true;
+        } else {
+            console.log({
+                message: 'the user does not exist',
+            });
+
+            return false;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 const checkBalance = async (userId, amount, t) => {
     try {
@@ -7,6 +32,10 @@ const checkBalance = async (userId, amount, t) => {
         if (balance >= Number(amount)) {
             return true;
         } else {
+            console.log({
+                message: 'insufficient funds',
+            });
+
             return false;
         }
     } catch (error) {
@@ -18,7 +47,11 @@ const changeBalance = async (userId, updatedBalance, t) => {
     try {
         await Account.update(
             { balance: updatedBalance },
-            { where: { userId } },
+            {
+                where: {
+                    userId,
+                },
+            },
             { transaction: t }
         );
     } catch (error) {
@@ -29,7 +62,11 @@ const changeBalance = async (userId, updatedBalance, t) => {
 const getBalance = async (userId, t) => {
     try {
         const accountData = await Account.findOne(
-            { where: { userId } },
+            {
+                where: {
+                    userId,
+                },
+            },
             { transaction: t }
         );
         const {
@@ -43,42 +80,82 @@ const getBalance = async (userId, t) => {
 };
 
 const replenish = async (userId, amount, t) => {
-    const currentBalance = await getBalance(userId, t);
-    const updatedBalance = currentBalance + Number(amount);
+    try {
+        const trueUser = await isUser(userId, t);
 
-    await changeBalance(userId, updatedBalance, t);
+        if (trueUser) {
+            const currentBalance = await getBalance(userId, t);
+            const updatedBalance = currentBalance + Number(amount);
+
+            await changeBalance(userId, updatedBalance, t);
+        } else {
+            console.log({
+                message: 'replenish terminated',
+            });
+
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const withdraw = async (userId, amount, t) => {
-    const transactionConfirmation = await checkBalance(userId, amount, t);
+    try {
+        const trueUser = await isUser(userId, t);
 
-    if (transactionConfirmation) {
-        const currentBalance = await getBalance(userId, t);
-        const updatedBalance = currentBalance - Number(amount);
+        if (trueUser) {
+            const transactionConfirmation = await checkBalance(
+                userId,
+                amount,
+                t
+            );
 
-        await changeBalance(userId, updatedBalance, t);
-    } else {
-        console.log({
-            message: 'the balance cannot be less than zero',
-        });
+            if (transactionConfirmation) {
+                const currentBalance = await getBalance(userId, t);
+                const updatedBalance = currentBalance - Number(amount);
+
+                await changeBalance(userId, updatedBalance, t);
+            } else {
+                console.log({
+                    message:
+                        'the balance cannot be less than zero, withdraw terminated',
+                });
+
+                return;
+            }
+        } else {
+            console.log({
+                message: 'withdraw terminated',
+            });
+
+            return;
+        }
+    } catch (error) {
+        console.error(error);
     }
 };
 
 const transfer = async (userId, amount, action, t) => {
-    const transactionConfirmation = await checkBalance(userId, amount, t);
-
-    if (transactionConfirmation) {
-        await withdraw(userId, amount, t);
-    } else {
-        console.log({
-            message: 'the balance cannot be less than zero',
-        });
-        return;
-    }
-
     const { recipientId } = action;
 
-    await replenish(recipientId, amount, t);
+    try {
+        const trueSender = await isUser(userId, t);
+        const trueRecipient = await isUser(recipientId, t);
+
+        if (trueSender && trueRecipient) {
+            await withdraw(userId, amount, t);
+            await replenish(recipientId, amount, t);
+        } else {
+            console.log({
+                message: 'transfer terminated',
+            });
+
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 module.exports = {

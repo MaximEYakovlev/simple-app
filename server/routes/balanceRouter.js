@@ -14,10 +14,10 @@ router
 
     /**
      * @swagger
-     * /balance:    
+     * /balance:
      *   get:
      *     summary: Balance retrieving
-     *     description: Retrieving user's balance by ID
+     *     description: Retrieving balance by user's ID
      */
     .get((req, res) => {
         fetchBalance(req, res);

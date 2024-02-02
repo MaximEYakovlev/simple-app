@@ -11,7 +11,6 @@ export const UserBalance = () => {
     };
 
     const fetchUserBalance = async (userId) => {
-        console.log({ userId });
         try {
             const response = await axios.get(
                 `http://localhost:8080/balance/${userId}`
@@ -26,9 +25,8 @@ export const UserBalance = () => {
 
     return (
         <div className={styles.form}>
-            <h3>User balance</h3>
+            <h3>Check balance</h3>
             <div>
-                <h4>Check the balance</h4>
                 <label>User ID:</label>
                 <input
                     type="text"

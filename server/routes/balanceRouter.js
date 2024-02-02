@@ -12,6 +12,13 @@ router
 router
     .route('/:id')
 
+    /**
+     * @swagger
+     * /balance:    
+     *   get:
+     *     summary: Balance retrieving
+     *     description: Retrieving user's balance by ID
+     */
     .get((req, res) => {
         fetchBalance(req, res);
     });

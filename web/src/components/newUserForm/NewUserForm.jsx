@@ -58,6 +58,7 @@ export const NewUserForm = ({ addUserToList }) => {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleFormChange}
+                        placeholder="first name"
                     />
                 </div>
                 <div>
@@ -67,6 +68,7 @@ export const NewUserForm = ({ addUserToList }) => {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleFormChange}
+                        placeholder="last name"
                     />
                 </div>
                 <div>

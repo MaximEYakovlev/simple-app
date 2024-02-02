@@ -38,7 +38,7 @@ export const UserOperationsForm = () => {
 
     return (
         <div className={styles.container}>
-            <h3>Balance operations</h3>
+            <h3>Balance transactions</h3>
             <div className={styles.row}>
                 <div className={styles.column}>
                     <h4>Withdraw</h4>

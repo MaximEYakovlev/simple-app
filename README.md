@@ -56,3 +56,6 @@ docker exec 74febf7175f1 npx sequelize-cli db:migrate
 ### IV
 
 Enter [http://127.0.0.1:3000/](http://127.0.0.1:3000/) to the browser URL bar.
+
+![balance management UI](Screenshot from 2024-02-02 02-33-08.png)
+

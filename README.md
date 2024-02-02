@@ -57,5 +57,7 @@ docker exec 74febf7175f1 npx sequelize-cli db:migrate
 
 Enter [http://127.0.0.1:3000/](http://127.0.0.1:3000/) to the browser URL bar.
 
-![simple balance management app UI](https://github.com/MaximEYakovlev/simple-balance-management-app/assets/61206936/b2c9fa59-afdf-4b45-bdf4-48e4df3c2bd6)
+![Screenshot from 2024-02-02 17-19-26](https://github.com/MaximEYakovlev/simple-balance-management-app/assets/61206936/470a34d4-7146-4045-a286-456ab9c148ca)
+
+
 

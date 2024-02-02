@@ -118,8 +118,7 @@ const withdraw = async (userId, amount, t) => {
                 await changeBalance(userId, updatedBalance, t);
             } else {
                 console.log({
-                    message:
-                        'the balance cannot be less than zero, withdraw terminated',
+                    message: 'withdraw terminated',
                 });
 
                 return;

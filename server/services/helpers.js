@@ -137,15 +137,15 @@ const withdraw = async (userId, amount, t) => {
     }
 };
 
-const transfer = async (userId, amount, action, t) => {
+const transfer = async (senderId, amount, action, t) => {
     const { recipientId } = action;
 
     try {
-        const trueSender = await isUser(userId, t);
+        const trueSender = await isUser(senderId, t);
         const trueRecipient = await isUser(recipientId, t);
 
         if (trueSender && trueRecipient) {
-            const { status } = await withdraw(userId, amount, t);
+            const { status } = await withdraw(senderId, amount, t);
 
             if (status) {
                 await replenish(recipientId, amount, t);

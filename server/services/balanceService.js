@@ -50,6 +50,7 @@ const fetchBalance = async (req, res) => {
             } else {
                 res.json({
                     message: 'fetch balance transaction terminated',
+                    cause: 'the user does not exist',
                 });
             }
         });

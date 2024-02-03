@@ -158,10 +158,11 @@ const transfer = async (senderId, amount, action, t) => {
 };
 
 module.exports = {
-    checkBalance,
     changeBalance,
+    checkBalance,
     getBalance,
+    isUser,
     replenish,
-    withdraw,
     transfer,
+    withdraw,
 };

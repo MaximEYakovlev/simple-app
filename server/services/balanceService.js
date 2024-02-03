@@ -1,5 +1,11 @@
 const { sequelize } = require('../db/models');
-const { getBalance, replenish, transfer, withdraw } = require('./helpers');
+const {
+    getBalance,
+    isUser,
+    replenish,
+    transfer,
+    withdraw,
+} = require('./helpers');
 
 const updateBalance = async (req, res) => {
     const { userId, amount, action } = req.body;
@@ -35,9 +41,17 @@ const fetchBalance = async (req, res) => {
 
     try {
         await sequelize.transaction(async (t) => {
-            const userBalanse = await getBalance(id, t);
+            const trueUser = isUser(userId, t);
 
-            res.status(200).json(userBalanse);
+            if (trueUser) {
+                const userBalanse = await getBalance(id, t);
+
+                res.status(200).json(userBalanse);
+            } else {
+                res.json({
+                    message: 'fetch balance transaction terminated',
+                });
+            }
         });
     } catch (error) {
         res.status(500).json(error);

@@ -105,13 +105,13 @@ const withdraw = async (userId, amount, t) => {
         const trueUser = await isUser(userId, t);
 
         if (trueUser) {
-            const transactionConfirmation = await checkBalance(
+            const fundsSufficiencyConfirmation = await checkBalance(
                 userId,
                 amount,
                 t
             );
 
-            if (transactionConfirmation) {
+            if (fundsSufficiencyConfirmation) {
                 const currentBalance = await getBalance(userId, t);
                 const updatedBalance = currentBalance - Number(amount);
 
@@ -130,7 +130,7 @@ const withdraw = async (userId, amount, t) => {
                 message: 'withdraw terminated',
             });
 
-            return;
+            return { status: false };
         }
     } catch (error) {
         console.error(error);
@@ -141,21 +141,10 @@ const transfer = async (senderId, amount, action, t) => {
     const { recipientId } = action;
 
     try {
-        const trueSender = await isUser(senderId, t);
-        const trueRecipient = await isUser(recipientId, t);
+        const { status } = await withdraw(senderId, amount, t);
 
-        if (trueSender && trueRecipient) {
-            const { status } = await withdraw(senderId, amount, t);
-
-            if (status) {
-                await replenish(recipientId, amount, t);
-            } else {
-                console.log({
-                    message: 'transfer terminated',
-                });
-
-                return;
-            }
+        if (status) {
+            await replenish(recipientId, amount, t);
         } else {
             console.log({
                 message: 'transfer terminated',

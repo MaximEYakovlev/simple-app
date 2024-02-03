@@ -41,7 +41,7 @@ const fetchBalance = async (req, res) => {
 
     try {
         await sequelize.transaction(async (t) => {
-            const trueUser = isUser(userId, t);
+            const trueUser = await isUser(id, t);
 
             if (trueUser) {
                 const userBalanse = await getBalance(id, t);

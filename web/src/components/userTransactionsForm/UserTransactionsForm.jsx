@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 import { updateBalance } from './helpers';
 
-export const UserOperationsForm = () => {
+export const UserTransactionsForm = () => {
     const [replenishUserId, setReplenishUserId] = useState('');
     const [replenishAmount, setReplenishAmount] = useState('');
 

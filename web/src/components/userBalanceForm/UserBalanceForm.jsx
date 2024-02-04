@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
 
-export const UserBalance = () => {
+export const UserBalanceForm = () => {
     const [userId, setUserId] = useState('');
     const [userBalance, setUserBalance] = useState('');
 

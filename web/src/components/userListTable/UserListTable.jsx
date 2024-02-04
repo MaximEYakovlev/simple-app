@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-export const UserList = ({ users }) => {
+export const UserListTable = ({ users }) => {
     const userList = users.map((user) => (
         <tr key={uuidv4()}>
             <td>{user.id}</td>

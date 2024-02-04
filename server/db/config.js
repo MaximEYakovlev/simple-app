@@ -5,7 +5,7 @@ module.exports = {
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        host: 'postgresql',
+        host: '172.20.0.2', // 'postgresql',
         dialect: 'postgres',
     },
 };

@@ -1,4 +1,4 @@
-const { Account, User } = require('../db/models');
+const { Account, User } = require('../../db/models');
 
 const isUser = async (userId, t) => {
     try {

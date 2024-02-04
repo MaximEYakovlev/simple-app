@@ -29,6 +29,4 @@ const resObject = (res, response) => {
     }
 };
 
-module.exports = {
-    sendResponse,
-};
+module.exports = { sendResponse };

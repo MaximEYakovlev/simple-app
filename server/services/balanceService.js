@@ -1,12 +1,12 @@
 const { sequelize } = require('../db/models');
-const { sendResponse } = require('./responseHelpers');
+const { sendResponse } = require('./helpers/responseHelpers');
 const {
     getBalance,
     isUser,
     replenish,
     transfer,
     withdraw,
-} = require('./balanceHelpers');
+} = require('./helpers/balanceHelpers');
 
 const updateBalance = async (req, res) => {
     const { userId, amount, action } = req.body;

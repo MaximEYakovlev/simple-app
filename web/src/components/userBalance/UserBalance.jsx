@@ -16,8 +16,12 @@ export const UserBalance = () => {
                 `http://localhost:8080/balance/${userId}`
             );
 
-            if (typeof response.data === 'number') {
-                setUserBalance(response.data);
+            const {
+                data: { balance },
+            } = response;
+
+            if (balance) {
+                setUserBalance(balance);
             } else {
                 setUserBalance(0);
             }

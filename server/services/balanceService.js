@@ -1,8 +1,10 @@
+const { response } = require('mongoui');
 const { sequelize } = require('../db/models');
 const {
     getBalance,
     isUser,
     replenish,
+    sendResponse,
     transfer,
     withdraw,
 } = require('./helpers');
@@ -14,16 +16,27 @@ const updateBalance = async (req, res) => {
         await sequelize.transaction(async (t) => {
             switch (action.type) {
                 case 'replenish':
-                    await replenish(userId, amount, t);
-                    res.sendStatus(200);
+                    {
+                        const response = await replenish(userId, amount, t);
+                        sendResponse(res, response, action);
+                    }
                     break;
                 case 'withdraw':
-                    await withdraw(userId, amount, t);
-                    res.sendStatus(200);
+                    {
+                        const response = await withdraw(userId, amount, t);
+                        sendResponse(res, response, action);
+                    }
                     break;
                 case 'transfer':
-                    await transfer(userId, amount, action, t);
-                    res.sendStatus(200);
+                    {
+                        const response = await transfer(
+                            userId,
+                            amount,
+                            action,
+                            t
+                        );
+                        sendResponse(res, response, action);
+                    }
                     break;
                 default:
                     res.json({
@@ -41,16 +54,19 @@ const fetchBalance = async (req, res) => {
 
     try {
         await sequelize.transaction(async (t) => {
-            const trueUser = await isUser(id, t);
+            const { trueUser, message } = await isUser(id, t);
 
             if (trueUser) {
-                const userBalanse = await getBalance(id, t);
+                const userBalance = await getBalance(id, t);
 
-                res.status(200).json(userBalanse);
+                res.status(200).json({
+                    balance: userBalance,
+                    message: 'fetch balance succeeded',
+                });
             } else {
                 res.json({
-                    message: 'fetch balance transaction terminated',
-                    cause: 'the user does not exist',
+                    message: 'balance fetch terminated',
+                    cause: message,
                 });
             }
         });

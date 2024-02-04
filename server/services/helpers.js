@@ -12,13 +12,14 @@ const isUser = async (userId, t) => {
         );
 
         if (user) {
-            return true;
+            return {
+                trueUser: true,
+            };
         } else {
-            console.log({
+            return {
+                trueUser: false,
                 message: 'the user does not exist',
-            });
-
-            return false;
+            };
         }
     } catch (error) {
         console.error(error);
@@ -30,13 +31,14 @@ const checkBalance = async (userId, amount, t) => {
         const balance = await getBalance(userId, t);
 
         if (balance >= Number(amount)) {
-            return true;
+            return {
+                status: true,
+            };
         } else {
-            console.log({
+            return {
+                status: false,
                 message: 'insufficient funds',
-            });
-
-            return false;
+            };
         }
     } catch (error) {
         console.error(error);
@@ -69,6 +71,7 @@ const getBalance = async (userId, t) => {
             },
             { transaction: t }
         );
+
         const {
             dataValues: { balance },
         } = accountData;
@@ -81,19 +84,23 @@ const getBalance = async (userId, t) => {
 
 const replenish = async (userId, amount, t) => {
     try {
-        const trueUser = await isUser(userId, t);
+        const { trueUser, message } = await isUser(userId, t);
 
         if (trueUser) {
             const currentBalance = await getBalance(userId, t);
             const updatedBalance = currentBalance + Number(amount);
 
             await changeBalance(userId, updatedBalance, t);
-        } else {
-            console.log({
-                message: 'replenish terminated',
-            });
 
-            return;
+            return {
+                status: true,
+                message: 'replenish succeeded',
+            };
+        } else {
+            return {
+                message: 'replenish terminated',
+                cause: message,
+            };
         }
     } catch (error) {
         console.error(error);
@@ -102,35 +109,34 @@ const replenish = async (userId, amount, t) => {
 
 const withdraw = async (userId, amount, t) => {
     try {
-        const trueUser = await isUser(userId, t);
+        const { trueUser, message } = await isUser(userId, t);
 
         if (trueUser) {
-            const fundsSufficiencyConfirmation = await checkBalance(
-                userId,
-                amount,
-                t
-            );
+            const { status, message } = await checkBalance(userId, amount, t);
 
-            if (fundsSufficiencyConfirmation) {
+            if (status) {
                 const currentBalance = await getBalance(userId, t);
                 const updatedBalance = currentBalance - Number(amount);
 
                 await changeBalance(userId, updatedBalance, t);
 
-                return { status: true };
+                return {
+                    status: true,
+                    message: 'withdraw succeeded',
+                };
             } else {
-                console.log({
+                return {
+                    status: false,
                     message: 'withdraw terminated',
-                });
-
-                return { status: false };
+                    cause: message,
+                };
             }
         } else {
-            console.log({
+            return {
+                status: false,
                 message: 'withdraw terminated',
-            });
-
-            return { status: false };
+                cause: message,
+            };
         }
     } catch (error) {
         console.error(error);
@@ -141,19 +147,82 @@ const transfer = async (senderId, amount, action, t) => {
     const { recipientId } = action;
 
     try {
-        const { status } = await withdraw(senderId, amount, t);
+        const sender = await isUser(senderId, t);
+        const recipient = await isUser(recipientId, t);
 
-        if (status) {
-            await replenish(recipientId, amount, t);
+        if (sender.trueUser && recipient.trueUser) {
+            const { status, cause } = await withdraw(senderId, amount, t);
+
+            if (status) {
+                await replenish(recipientId, amount, t);
+
+                return {
+                    status: true,
+                    message: 'transfer succeeded',
+                };
+            } else {
+                return {
+                    status: false,
+                    message: 'transfer terminated',
+                    cause: cause,
+                };
+            }
         } else {
-            console.log({
+            return {
+                status: false,
                 message: 'transfer terminated',
-            });
-
-            return;
+                cause: sender.message
+                    ? `sender/${sender.message}`
+                    : `recipient/${recipient.message}`,
+            };
         }
     } catch (error) {
         console.error(error);
+    }
+};
+
+const sendResponse = (res, response, action) => {
+    switch (action.type) {
+        case 'replenish':
+            if (response.status) {
+                res.status(200).json({
+                    message: response.message,
+                });
+            } else {
+                res.json({
+                    message: response.message,
+                    cause: response.cause,
+                });
+            }
+            break;
+        case 'withdraw':
+            if (response.status) {
+                res.status(200).json({
+                    message: response.message,
+                });
+            } else {
+                res.json({
+                    message: response.message,
+                    cause: response.cause,
+                });
+            }
+            break;
+        case 'transfer':
+            if (response.status) {
+                res.status(200).json({
+                    message: response.message,
+                });
+            } else {
+                res.json({
+                    message: response.message,
+                    cause: response.cause,
+                });
+            }
+            break;
+        default:
+            res.json({
+                message: 'there is no such action type',
+            });
     }
 };
 
@@ -163,6 +232,7 @@ module.exports = {
     getBalance,
     isUser,
     replenish,
+    sendResponse,
     transfer,
     withdraw,
 };

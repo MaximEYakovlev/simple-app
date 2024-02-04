@@ -1,13 +1,12 @@
-const { response } = require('mongoui');
 const { sequelize } = require('../db/models');
+const { sendResponse } = require('./responseHelpers');
 const {
     getBalance,
     isUser,
     replenish,
-    sendResponse,
     transfer,
     withdraw,
-} = require('./helpers');
+} = require('./balanceHelpers');
 
 const updateBalance = async (req, res) => {
     const { userId, amount, action } = req.body;

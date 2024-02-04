@@ -181,58 +181,12 @@ const transfer = async (senderId, amount, action, t) => {
     }
 };
 
-const sendResponse = (res, response, action) => {
-    switch (action.type) {
-        case 'replenish':
-            if (response.status) {
-                res.status(200).json({
-                    message: response.message,
-                });
-            } else {
-                res.json({
-                    message: response.message,
-                    cause: response.cause,
-                });
-            }
-            break;
-        case 'withdraw':
-            if (response.status) {
-                res.status(200).json({
-                    message: response.message,
-                });
-            } else {
-                res.json({
-                    message: response.message,
-                    cause: response.cause,
-                });
-            }
-            break;
-        case 'transfer':
-            if (response.status) {
-                res.status(200).json({
-                    message: response.message,
-                });
-            } else {
-                res.json({
-                    message: response.message,
-                    cause: response.cause,
-                });
-            }
-            break;
-        default:
-            res.json({
-                message: 'there is no such action type',
-            });
-    }
-};
-
 module.exports = {
     changeBalance,
     checkBalance,
     getBalance,
     isUser,
     replenish,
-    sendResponse,
     transfer,
     withdraw,
 };

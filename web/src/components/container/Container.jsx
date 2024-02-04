@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
 import { NewUserForm } from '../newUserForm/NewUserForm';
-import { UserList } from '../userList/UserList';
-import { UserOperationsForm } from '../userOperationsForm/UserOperationsForm';
-import { UserBalance } from '../userBalance/UserBalance';
+import { UserListTable } from '../userListTable/UserListTable';
+import { UserTransactionsForm } from '../userTransactionsForm/UserTransactionsForm';
+import { UserBalanceForm } from '../userBalanceForm/UserBalanceForm';
 
 export const Container = () => {
     const [users, setUsers] = useState([]);
@@ -31,9 +31,9 @@ export const Container = () => {
     return (
         <div className={styles.container}>
             <NewUserForm addUserToList={addUserToList} />
-            <UserList users={users} />
-            <UserOperationsForm />
-            <UserBalance />
+            <UserListTable users={users} />
+            <UserTransactionsForm />
+            <UserBalanceForm />
         </div>
     );
 };

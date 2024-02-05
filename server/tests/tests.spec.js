@@ -1,3 +1,11 @@
+/* initial db values should be
+user 1 { id: 7, balance: 99.00 }
+user 2 { id: 6 }
+
+Note!
+The state of the balance changes as the tests are run.
+*/
+
 const { sequelize } = require('../db/models');
 const {
     isUser,

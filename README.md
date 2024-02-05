@@ -59,4 +59,5 @@ Enter [http://127.0.0.1:3000](http://127.0.0.1:3000) to the browser URL bar.
 
 ![Screenshot from 2024-02-02 17-24-49](https://github.com/MaximEYakovlev/simple-balance-management-app/assets/61206936/37fc7877-dc32-4cbe-8ea6-670c3258620e)
 
+![Screenshot from 2024-02-05 05-16-53](https://github.com/MaximEYakovlev/simple-balance-management-app/assets/61206936/dca71ae7-d3e4-4725-ab9a-52df3682c271)
 

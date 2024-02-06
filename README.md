@@ -35,7 +35,7 @@ docker-compose up
 
 ### III
 
-Find out the `web-server` `CONTAINER ID` by executing the next docker command in the terminal:
+Find out the `web-server CONTAINER ID` by executing the next docker command in the terminal:
 
 ```
 docker ps
@@ -59,7 +59,7 @@ Enter [http://127.0.0.1:3000](http://127.0.0.1:3000) to the browser URL bar.
 
 > [!NOTE]
 > **To run the API documentation:**
-> 1. Launch the terminal, move to the `docs` directory of the project.
+> 1. Launch the terminal, move to the `server / docs` directory of the project.
 > 2. Execute the next command:
 >   ```
 >   npx serve

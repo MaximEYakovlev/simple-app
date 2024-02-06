@@ -1,1 +1,165 @@
-{"_type":"export","__export_format":4,"__export_date":"2024-02-06T08:02:01.925Z","__export_source":"insomnia.desktop.app:v2023.5.8","resources":[{"_id":"req_69de841c28d34958b5cc8e446a605971","parentId":"fld_f0ddeb24b59447ed8aee2675a8ac6cf9","modified":1707206476025,"created":1706893017395,"url":"http://127.0.0.1:8080/balance/7","name":"fetch balance","description":"","method":"GET","body":{"mimeType":"","text":""},"parameters":[],"headers":[{"name":"Content-Type","value":""},{"name":"User-Agent","value":"insomnia/2023.5.8"}],"authentication":{},"metaSortKey":-1706894032280,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"fld_f0ddeb24b59447ed8aee2675a8ac6cf9","parentId":"wrk_0dc7d0a4115848248e3fdb2acb0d8926","modified":1707205245526,"created":1706869162187,"name":"user balance management","description":"","environment":{},"environmentPropertyOrder":null,"metaSortKey":-1706869162187,"_type":"request_group"},{"_id":"wrk_0dc7d0a4115848248e3fdb2acb0d8926","parentId":null,"modified":1707205258920,"created":1706869030664,"name":"simple balance management app","description":"","scope":"collection","_type":"workspace"},{"_id":"req_8547233214ec4b13a597aab5e03b087d","parentId":"fld_f0ddeb24b59447ed8aee2675a8ac6cf9","modified":1707206484849,"created":1706869217759,"url":"http://127.0.0.1:8080/balance","name":"replenish","description":"","method":"PUT","body":{"mimeType":"application/json","text":"{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"replenish\"\n\t}\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"},{"name":"User-Agent","value":"insomnia/2023.5.8"}],"authentication":{},"metaSortKey":-1706894032230,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_f5930b0ea7624f9d87f359c37a93b340","parentId":"fld_f0ddeb24b59447ed8aee2675a8ac6cf9","modified":1707206492952,"created":1706893850231,"url":"http://127.0.0.1:8080/balance","name":"withdraw","description":"","method":"PUT","body":{"mimeType":"application/json","text":"{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"withdraw\"\n\t}\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"},{"name":"User-Agent","value":"insomnia/2023.5.8"}],"authentication":{},"metaSortKey":-1706894032205,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_a41a338859cb4eafbe3f51c28cdc101f","parentId":"fld_f0ddeb24b59447ed8aee2675a8ac6cf9","modified":1707206500926,"created":1706894032180,"url":"http://127.0.0.1:8080/balance","name":"transfer","description":"","method":"PUT","body":{"mimeType":"application/json","text":"{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"transfer\",\n\t\t\"recipientId\": 6\n\t}\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"},{"name":"User-Agent","value":"insomnia/2023.5.8"}],"authentication":{},"metaSortKey":-1706894032180,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_968194bbb622d3612fb8cad4a8a7bf5a2b832453","parentId":"wrk_0dc7d0a4115848248e3fdb2acb0d8926","modified":1706869030668,"created":1706869030668,"name":"Base Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":false,"metaSortKey":1706869030668,"_type":"environment"},{"_id":"jar_968194bbb622d3612fb8cad4a8a7bf5a2b832453","parentId":"wrk_0dc7d0a4115848248e3fdb2acb0d8926","modified":1706869030669,"created":1706869030669,"name":"Default Jar","cookies":[],"_type":"cookie_jar"}]}
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-02-06T08:02:01.925Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.8",
+    "resources": [
+        {
+            "_id": "req_69de841c28d34958b5cc8e446a605971",
+            "parentId": "fld_f0ddeb24b59447ed8aee2675a8ac6cf9",
+            "modified": 1707206476025,
+            "created": 1706893017395,
+            "url": "http://127.0.0.1:8080/balance/7",
+            "name": "fetch balance",
+            "description": "",
+            "method": "GET",
+            "body": { "mimeType": "", "text": "" },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "" },
+                { "name": "User-Agent", "value": "insomnia/2023.5.8" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706894032280,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_f0ddeb24b59447ed8aee2675a8ac6cf9",
+            "parentId": "wrk_0dc7d0a4115848248e3fdb2acb0d8926",
+            "modified": 1707205245526,
+            "created": 1706869162187,
+            "name": "user balance management",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1706869162187,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_0dc7d0a4115848248e3fdb2acb0d8926",
+            "parentId": null,
+            "modified": 1707205258920,
+            "created": 1706869030664,
+            "name": "simple balance management app",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_8547233214ec4b13a597aab5e03b087d",
+            "parentId": "fld_f0ddeb24b59447ed8aee2675a8ac6cf9",
+            "modified": 1707206484849,
+            "created": 1706869217759,
+            "url": "http://127.0.0.1:8080/balance",
+            "name": "replenish",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"replenish\"\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" },
+                { "name": "User-Agent", "value": "insomnia/2023.5.8" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706894032230,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_f5930b0ea7624f9d87f359c37a93b340",
+            "parentId": "fld_f0ddeb24b59447ed8aee2675a8ac6cf9",
+            "modified": 1707206492952,
+            "created": 1706893850231,
+            "url": "http://127.0.0.1:8080/balance",
+            "name": "withdraw",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"withdraw\"\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" },
+                { "name": "User-Agent", "value": "insomnia/2023.5.8" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706894032205,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_a41a338859cb4eafbe3f51c28cdc101f",
+            "parentId": "fld_f0ddeb24b59447ed8aee2675a8ac6cf9",
+            "modified": 1707206500926,
+            "created": 1706894032180,
+            "url": "http://127.0.0.1:8080/balance",
+            "name": "transfer",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\": 7,\n\t\"amount\": 500,\n\t\"action\": {\n\t\t\"type\": \"transfer\",\n\t\t\"recipientId\": 6\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" },
+                { "name": "User-Agent", "value": "insomnia/2023.5.8" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1706894032180,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_968194bbb622d3612fb8cad4a8a7bf5a2b832453",
+            "parentId": "wrk_0dc7d0a4115848248e3fdb2acb0d8926",
+            "modified": 1706869030668,
+            "created": 1706869030668,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1706869030668,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_968194bbb622d3612fb8cad4a8a7bf5a2b832453",
+            "parentId": "wrk_0dc7d0a4115848248e3fdb2acb0d8926",
+            "modified": 1706869030669,
+            "created": 1706869030669,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}

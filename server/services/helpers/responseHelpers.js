@@ -17,14 +17,16 @@ const sendResponse = (res, response, action) => {
 };
 
 const resObject = (res, response) => {
-    if (response.status) {
+    const { cause, message, status } = response;
+
+    if (status) {
         res.status(200).json({
-            message: response.message,
+            message,
         });
     } else {
-        res.json({
-            message: response.message,
-            cause: response.cause,
+        res.status(404).json({
+            message,
+            cause,
         });
     }
 };

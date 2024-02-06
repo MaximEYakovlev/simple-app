@@ -63,7 +63,7 @@ const fetchBalance = async (req, res) => {
                     message: 'fetch balance succeeded',
                 });
             } else {
-                res.json({
+                res.status(404).json({
                     message: 'balance fetch terminated',
                     cause: message,
                 });

@@ -98,6 +98,7 @@ const replenish = async (userId, amount, t) => {
             };
         } else {
             return {
+                status: false,
                 message: 'replenish terminated',
                 cause: message,
             };

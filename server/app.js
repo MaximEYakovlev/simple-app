@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
-const specs = require('./docs/index');
+const specs = require('./swagger/index');
 
 const PORT = process.env.PORT;
 

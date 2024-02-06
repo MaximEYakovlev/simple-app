@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
-const swaggerUi = require('swagger-ui-express');
-const specs = require('./swagger/index');
 
 const PORT = process.env.PORT;
 
@@ -16,7 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/user', userRouter);
 app.use('/balance', balanceRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(PORT, () => {
     console.log(`the server is listening on the port ${PORT}`);
